@@ -25,18 +25,6 @@
     }
 }
 
-.experts {
-    .title {
-        text-transform: capitalize;
-    }
-}
-
 .selected {
     color: blue;
-}
-
-@media screen and (max-width: 800px) {
-    .content {
-        width: 100%;
-    }
 }

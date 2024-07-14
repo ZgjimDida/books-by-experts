@@ -1,0 +1,21 @@
+<div class="content experts">
+  <h1>Experts</h1>
+  <ng-container *ngFor="let expert of experts; let i = index">
+    <ng-container *ngIf="i < 8">
+      <div class="box">
+        <h2 class="title">{{convertName(expert)}}</h2>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+<div class="content books">
+  <h1>Books</h1>
+  <ng-container *ngFor="let book of books; let i = index">
+    <ng-container *ngIf="i < 8">
+      <div class="box">
+        {{book}}
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
