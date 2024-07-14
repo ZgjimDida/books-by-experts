@@ -1,0 +1,8 @@
+<div class="content experts">
+  <h1>Experts</h1>
+  <ng-container *ngFor="let expert of experts; let i = index">
+    <div class="box">
+      <h2 class="title">{{convertName(expert)}}</h2>
+    </div>
+  </ng-container>
+</div>

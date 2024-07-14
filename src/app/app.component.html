@@ -1,3 +1,11 @@
+<div class="navigation">
+  <ul>
+    <li><a [routerLinkActive]="'active'" [routerLink]="'/'">Home</a></li>
+    <li><a [routerLinkActive]="'active'" [routerLink]="'/experts'">Experts</a></li>
+    <li><a [routerLinkActive]="'active'" [routerLink]="'/books'">Books</a></li>
+  </ul>
+</div>
+
 <div class="content experts">
   <h1>Experts</h1>
   <ng-container *ngFor="let expert of experts; let i = index">
@@ -19,8 +27,6 @@
     </ng-container>
   </ng-container>
 </div>
-
-
 
 <!-- <ng-container *ngFor="let recommender of recommenders">
 

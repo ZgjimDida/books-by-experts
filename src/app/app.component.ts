@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { allBooks } from './variables';
+import { HelperService } from './helper.service';
 
 @Component({
   selector: 'app-root',
@@ -14,20 +15,26 @@ export class AppComponent {
   selectedAuthors: any[] = [];
   selectedBooks: any[] = [];
 
+  constructor(private helper: HelperService){
+
+  }
+
   ngOnInit() {
     this.setBooks();
-    this.setexperts();
+    this.setExperts();
     this.setSortedBooks(this.allBooks);
     this.removeDuplicates();
   }
 
   setBooks() {
     this.books = [... new Set(this.allBooks.map(item => item.title))];
+    this.helper.setBooks(this.books);
   }
 
-  setexperts() {
+  setExperts() {
     this.experts = [... new Set(this.allBooks.map(item => item.recommender))];
     this.experts.sort();
+    this.helper.setExperts(this.experts);
   }
 
   setSortedBooks(booksToSort: any[]) {
@@ -69,8 +76,7 @@ export class AppComponent {
   }
 
   convertName(name: string) {
-
-    return name.replaceAll('-', ' ');
+    return this.helper.convertName(name);
   }
 
   removeDuplicates() {
