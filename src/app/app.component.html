@@ -1,7 +1,10 @@
-{{bookTitles | json}}
-
-<br/><br/>
-----
-{{recommenders | json}}
+Sorted books
+<ng-container *ngFor="let book of sortedBooks">
+  {{book.title}} ({{book.recommenders.length}})<br />
+  <ng-container *ngFor="let recommender of book.recommenders">
+    {{recommender}},
+  </ng-container>
+  <br /><br />
+</ng-container>
 
 <router-outlet></router-outlet>
