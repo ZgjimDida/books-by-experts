@@ -3,12 +3,14 @@
   <button [ngClass]="{'selected': isSelected(recommender)}" (click)="select(recommender)">{{recommender}}</button><br />
 </ng-container>
 
-Sorted books
-<ng-container *ngFor="let book of sortedBooks">
-  {{book.title}} ({{book.recommenders.length}})<br />
-  <ng-container *ngFor="let recommender of book.recommenders">
-    {{recommender}},
+<div class="sorted">Sorted books
+  <ng-container *ngFor="let book of sortedBooks">
+    {{book.title}} ({{book.recommenders.length}})<br />
+    <ng-container *ngFor="let recommender of book.recommenders">
+      {{recommender}},
+    </ng-container>
+    <br /><br />
   </ng-container>
-  <br /><br />
-</ng-container>
+</div>
+
 <router-outlet></router-outlet>

@@ -26,6 +26,7 @@ export class AppComponent {
 
   setRecommenders() {
     this.recommenders = [... new Set(this.allBooks.map(item => item.recommender))];
+    this.recommenders.sort();
   }
 
   setSortedBooks(booksToSort: any[]) {
@@ -64,5 +65,17 @@ export class AppComponent {
     }
     this.selectedBooks = selectedBooks;
     this.setSortedBooks(this.selectedBooks);
+  }
+
+  removeDuplicates() {
+    let newArray = [];
+    for (let i = 0; i < this.allBooks.length; i++) {
+      newArray.push(this.allBooks[i].recommender + "THESPLIT" + this.allBooks[i].title);
+    }
+    newArray = [... new Set(newArray)];
+    let newArray2 = [];
+    for (let i = 0; i < newArray.length; i++) {
+      newArray2.push({ "title": newArray[i].split("THESPLIT")[1], "recommender": newArray[i].split("THESPLIT")[0] });
+    }
   }
 }
