@@ -2,8 +2,10 @@
   <h1>Choose Experts</h1>
   <ng-container *ngFor="let expert of experts; let i = index">
     <div class="box" [ngClass]="{'selected': isSelected(expert)}" (click)="select(expert)">
-      <h2 class="title">{{convertName(expert)}}</h2>
       <img src="../assets/experts/{{expert}}.jpg" />
+      <div class="bg">
+        <h2 class="title">{{convertName(expert)}}</h2>
+      </div>
     </div>
   </ng-container>
 </div>
@@ -13,11 +15,16 @@
 
 <div class="content sorted" *ngIf="generated">
   Boook recommendations by:<br />
-  <ng-container *ngFor="let expert of selectedExperts">
-    <p class="title">{{convertName(expert)}}</p>
-  </ng-container><br />
+  <div class="recommenders">
+    <ng-container *ngFor="let expert of selectedExperts">
+      <div class="recommender">
+        <p class="title">{{convertName(expert)}}</p>
+        <img src="../assets/experts/{{expert}}.jpg" />
+      </div>
+    </ng-container>
+  </div>
   <ng-container *ngFor="let book of sortedBooks">
-    {{book.title}} <br />
+    <span class="bold">{{book.title}}</span> <br />
     Recommended by ({{book.recommenders?.length}}):
     <ng-container *ngFor="let recommender of book.recommenders">
       <p class="title">{{convertName(recommender)}}</p>
