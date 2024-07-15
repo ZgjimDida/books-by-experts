@@ -1,24 +1,38 @@
-<div class="navigation">
-  <ul>
-    <li><a [routerLinkActive]="'active'" [routerLink]="'/'">Home</a></li>
-    <li><a [routerLinkActive]="'active'" [routerLink]="'/experts'">Experts</a></li>
-    <li><a [routerLinkActive]="'active'" [routerLink]="'/books'">Books</a></li>
-  </ul>
+<div class="content experts" *ngIf="!generated">
+  <h1>Choose Experts</h1>
+  <ng-container *ngFor="let expert of experts; let i = index">
+    <div class="box" [ngClass]="{'selected': isSelected(expert)}" (click)="select(expert)">
+      <h2 class="title">{{convertName(expert)}}</h2>
+      <img src="../assets/experts/{{expert}}.jpg" />
+    </div>
+  </ng-container>
 </div>
 
-<!-- <ng-container *ngFor="let recommender of recommenders">
+<button (click)="setSelectedBooks()" *ngIf="(selectedExperts.length>0) && !generated">Generate list</button>
+<button (click)="chooseExperts()" *ngIf="generated">Choose experts</button>
 
-  <button [ngClass]="{'selected': isSelected(recommender)}" (click)="select(recommender)">{{recommender}}</button><br />
-</ng-container>
-
-<div class="sorted">Sorted books
+<div class="content sorted" *ngIf="generated">
+  Boook recommendations by:<br />
+  <ng-container *ngFor="let expert of selectedExperts">
+    <p class="title">{{convertName(expert)}}</p>
+  </ng-container><br />
   <ng-container *ngFor="let book of sortedBooks">
-    {{book.title}} ({{book.recommenders.length}})<br />
+    {{book.title}} <br />
+    Recommended by ({{book.recommenders?.length}}):
     <ng-container *ngFor="let recommender of book.recommenders">
-      {{recommender}},
+      <p class="title">{{convertName(recommender)}}</p>
     </ng-container>
     <br /><br />
   </ng-container>
-</div> -->
+</div>
 
+<ng-container *ngIf="false">
+  <div class="navigation">
+    <ul>
+      <li><a [routerLink]="'/'">Home</a></li>
+      <li><a [routerLinkActive]="'active'" [routerLink]="'/experts'">Experts</a></li>
+      <li><a [routerLinkActive]="'active'" [routerLink]="'/books'">Books</a></li>
+    </ul>
+  </div>
+</ng-container>
 <router-outlet></router-outlet>

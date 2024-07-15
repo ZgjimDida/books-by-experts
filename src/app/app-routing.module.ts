@@ -5,10 +5,12 @@ import { BooksComponent } from './books/books.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'experts', component: ExpertsComponent },
-  { path: 'books', component: BooksComponent },
+  // { path: '', redirectTo: 'home', pathMatch: 'full' },
+  // { path: 'home', component: HomeComponent },
+  // { path: 'experts', component: ExpertsComponent },
+  // { path: 'experts/:id', component: ExpertsComponent },
+  // { path: 'books', component: BooksComponent },
+  // { path: 'books/:id', component: BooksComponent },
 ];
 
 @NgModule({

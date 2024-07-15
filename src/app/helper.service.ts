@@ -10,16 +10,11 @@ export class HelperService {
   experts: any[] = [];
   sortedBooks: any = [];
 
-  constructor() { }
-
-  test() {
-    console.log("test");
-  }
-
   setup() {
     this.setupBooks();
     this.setupExperts();
     this.setupSortedBooks(this.allBooks);
+    this.removeSingleRecommendedBooks();
   }
 
   setupBooks() {
@@ -33,14 +28,19 @@ export class HelperService {
 
   setupSortedBooks(booksToSort: any[]) {
     this.sortedBooks = [];
-    let experts = [];
+    let recommenders = [];
     for (let i = 0; i < this.books.length; i++) {
       booksToSort.filter(item => item.title === this.books[i]);
-      experts = booksToSort.filter(item => item.title === this.books[i]).map(item => item.recommender);
-      this.sortedBooks.push({ title: this.books[i], experts: experts })
+      recommenders = booksToSort.filter(item => item.title === this.books[i]).map(item => item.recommender);
+      this.sortedBooks.push({ title: this.books[i], recommenders: recommenders.sort() })
     }
-    this.sortedBooks.sort((a: any, b: any) => { return b.experts.length - a.experts.length })
-    this.sortedBooks = this.sortedBooks.filter((item: any) => item.experts.length > 0)
+    this.sortedBooks.sort((a: any, b: any) => { return b.recommenders.length - a.recommenders.length })
+    this.sortedBooks = this.sortedBooks.filter((item: any) => item.recommenders.length > 0)
+    return this.sortedBooks;
+  }
+
+  getAllBooks(){
+    return this.allBooks;
   }
 
   getBooks() {
@@ -67,5 +67,15 @@ export class HelperService {
       newArray2.push({ "title": newArray[i].split("THESPLIT")[1], "recommender": newArray[i].split("THESPLIT")[0] });
     }
     console.log(newArray2);
+  }
+
+  removeSingleRecommendedBooks() {
+    let cleanedUpArray = []
+    for (let i = 0; i < this.allBooks.length; i++) {
+      if (this.allBooks.filter(item => item.title === this.allBooks[i].title).length > 1) {
+        cleanedUpArray.push(this.allBooks[i]);
+      }
+    }
+    console.log('what', cleanedUpArray);
   }
 }
