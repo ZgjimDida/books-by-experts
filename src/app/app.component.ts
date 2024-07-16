@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { allBooks } from './variables';
 import { HelperService } from './helper.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -15,6 +15,7 @@ export class AppComponent {
   selectedBooks: any[] = [];
   sortedBooks: any[] = [];
   generated = false;
+  showMessage = false;
 
   constructor(private helper: HelperService, private route: ActivatedRoute, private router: Router) {
 
@@ -66,10 +67,16 @@ export class AppComponent {
     console.log(this.sortedBooks);
     this.generated = true;
     this.generateQueryParam();
+    this.scrollToTop();
   }
 
   chooseExperts() {
     this.generated = false;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: null
+    });
+    this.scrollToTop();
   }
 
   selectFromQuery(query: string) {
@@ -93,4 +100,20 @@ export class AppComponent {
     });
   }
 
+  scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  copyURL() {
+    console.log(this.router.url);
+    navigator.clipboard.writeText('https://expertbookrecommendations.com' + this.router.url);
+    this.showMessage = true;
+    setTimeout(()=>{
+      this.showMessage = false
+    }, 2000);
+  }
 }

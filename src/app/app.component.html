@@ -1,5 +1,13 @@
+<div class="content">
+  <span class="logo"><img src="favicon.ico">Expert Books Recommendations</span>
+</div>
+
 <div class="content experts" *ngIf="!generated">
-  <h1>Choose Experts</h1>
+  <h1>Choose Experts
+    <ng-container *ngIf="selectedExperts.length > 0">
+      ({{selectedExperts.length}} selected)
+    </ng-container>
+  </h1>
   <ng-container *ngFor="let expert of experts; let i = index">
     <div class="box" [ngClass]="{'selected': isSelected(expert)}" (click)="select(expert)">
       <img src="../assets/experts/{{expert}}.jpg" />
@@ -12,6 +20,7 @@
 
 <button (click)="setSelectedBooks()" *ngIf="(selectedExperts.length>0) && !generated">Generate list</button>
 <button (click)="chooseExperts()" *ngIf="generated">Choose experts</button>
+<button (click)="copyURL()" class="copy" *ngIf="generated">Copy Url</button>
 
 <div class="content sorted" *ngIf="generated">
   Boook recommendations by:<br />
@@ -32,6 +41,8 @@
     <br /><br />
   </ng-container>
 </div>
+
+<div id="snackbar" [ngClass]="{'show': showMessage}">Url has been copied!</div>
 
 <ng-container *ngIf="false">
   <div class="navigation">

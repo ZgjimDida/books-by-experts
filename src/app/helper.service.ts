@@ -23,7 +23,7 @@ export class HelperService {
 
   setupExperts() {
     this.experts = [... new Set(this.allBooks.map(item => item.recommender))];
-    this.experts.sort();
+    // this.experts.sort();
   }
 
   setupSortedBooks(booksToSort: any[]) {
